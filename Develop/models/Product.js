@@ -15,7 +15,6 @@ Product.init(
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
-      onDelete: 'CASCADE'
     },
     product_name: {
       type: DataTypes.STRING,
@@ -24,10 +23,16 @@ Product.init(
     price: {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
+      validate: {
+        min: 0
+      }
     },
     stock: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      validate: {
+        min: 0
+      }
     },
     // Reference to Category ID
     category_id: {
@@ -35,16 +40,24 @@ Product.init(
       references: {
         model: 'category',
         key: 'id',
-        unique: false,
       }
+    },
+    deletedAt: {
+      type: DataTypes.DATE
     }
   },
   {
     sequelize,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
     modelName: 'product',
+    paraniod: true,
+    freezeTableName: true,
+    timestamps: true,
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt',
+    indexes: {
+      fields: ['category_id']
+    }
   }
 );
 

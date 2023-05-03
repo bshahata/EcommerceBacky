@@ -54,7 +54,7 @@ router.put('/:id', async (req, res) => {
         where: { id: req.params.id }
       })
       if (!categoryData) {
-        req.status(404).json({ message: 'No category found with that id.'})
+        res.status(404).json({ message: 'No category found with that id.'})
       }
       res.status(200).json("category updated");
   } catch (err) {

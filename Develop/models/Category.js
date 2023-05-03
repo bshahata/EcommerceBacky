@@ -25,6 +25,13 @@ Category.init(
     freezeTableName: true,
     underscored: true,
     modelName: 'category',
+    paranoid: true,
+    indexes: [
+    {
+      name: 'category_name_index',
+      fields: ['category_name']
+    }
+    ]
   }
 );
 
